@@ -3,8 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2519379899308487" />
-        <entry key="app/src/main/res/layout/item_legend.xml" value="0.24775543212890624" />
+        <entry key="app/src/main/res/drawable-v24/selector_color_tabs.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/background_splash.xml" value="0.17380218505859377" />
+        <entry key="app/src/main/res/drawable/gradient_bg.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/selector_color_tabs.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/shadow.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/test.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_addition.xml" value="0.22950707680065463" />
+        <entry key="app/src/main/res/layout/activity_bar_chart.xml" value="0.23839106651101527" />
+        <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.25815217391304346" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.16210739614994935" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.25815217391304346" />
+        <entry key="app/src/main/res/layout/activity_suggestion_with_login_sys.xml" value="0.17684020996093755" />
+        <entry key="app/src/main/res/layout/fragment_addition.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.28119049072265623" />
+        <entry key="app/src/main/res/layout/item_legend.xml" value="0.25735626220703123" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>
     </option>
   </component>

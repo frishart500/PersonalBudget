@@ -1,21 +1,21 @@
 package com_budget.budget.budget_java.personalbudget;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.WindowManager;
-import android.widget.Adapter;
-import android.widget.SeekBar;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -24,18 +24,23 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.model.GradientColor;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private int[] tabIcons = {
+            R.drawable.goes_down_img,
+            R.drawable.goes_up_img
+    };
 
-    //private BarChart chart;
-    //private ArrayList barArrayList;
-
+    //btn addition
+    //ImageView going to profile btn
+    //btn go to bar chart (for annual period)
+    private ImageView profileBtn, addBtn, graphCartBtn;
+    //TabLayout implementing
+    private TabLayout tabsExpensesAndIncomes;
     //RecyclerView implementing
     private RecyclerView rvLegend;
     //ArrayList for items legends in recyclerView
@@ -44,34 +49,56 @@ public class MainActivity extends AppCompatActivity {
     //Pie chart View
     private PieChart pieChart;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pieChart = findViewById(R.id.chart1);
-        rvLegend = findViewById(R.id.rvLegend);
+
+
+        init();
+
+        setupTabIcons();
+        applyColorStateList(tabsExpensesAndIncomes, R.drawable.selector_color_tabs);
+
         setupPieChart();
         loadPieChartData();
         buildRecyclerVIew();
 
         rvLegend.setAdapter(adapterRvLegends);
-       /* chart = findViewById(R.id.chart1);
-        getData();
-        BarDataSet barDataSet = new BarDataSet(barArrayList, "Amount Of Money in $");
-        BarData barData = new BarData(barDataSet);
-        chart.setData(barData);
-        //color bar data set
-        barDataSet.setColor(getResources().getColor(R.color.purple_200));
-        //text color
-        barDataSet.setValueTextColor(Color.BLACK);
-        //setting text size
-        barDataSet.setValueTextSize(16f);
-        Description descriptionChart = new Description();
-        descriptionChart.setText("");
-        chart.setDescription(descriptionChart);
-        chart.getDescription().setEnabled(true);*/
 
+        View.OnClickListener BTNsClicks = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()){
+                    case R.id.addBtn:
+                        startActivity(new Intent(getApplicationContext(), AdditionActivity.class));
+                        break;
+                    case R.id.profileBtn:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        break;
+                    case R.id.graphCartImgBtn:
+                        startActivity(new Intent(getApplicationContext(), BarChartActivity.class));
+                        break;
+                }
+            }
+        };
+        addBtn.setOnClickListener(BTNsClicks);
+        graphCartBtn.setOnClickListener(BTNsClicks);
+        profileBtn.setOnClickListener(BTNsClicks);
+
+    }
+
+    private void init(){
+        profileBtn = findViewById(R.id.profileBtn);
+        addBtn = findViewById(R.id.addBtn);
+        graphCartBtn = findViewById(R.id.graphCartImgBtn);
+
+        tabsExpensesAndIncomes = findViewById(R.id.tabsExpensesAndIncomes);
+
+        pieChart = findViewById(R.id.chart1);
+        rvLegend = findViewById(R.id.rvLegend);
     }
 
     private void buildRecyclerVIew(){
@@ -80,21 +107,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setDataLegendForRecyclerView(){
+    private void setupTabIcons() {
+        tabsExpensesAndIncomes.getTabAt(0).setIcon(tabIcons[0]);
+        tabsExpensesAndIncomes.getTabAt(1).setIcon(tabIcons[1]);
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void applyColorStateList(@NonNull TabLayout tabLayout, int resId) {
+        tabLayout.setTabIconTint(getApplicationContext().getColorStateList(resId));
     }
 
     private void setupPieChart() {
         pieChart.setDrawRoundedSlices(true);
         pieChart.setDrawHoleEnabled(true);
-        //pieChart.setUsePercentValues(true);
-        //pieChart.setEntryLabelTextSize(12);
         pieChart.setEntryLabelColor(Color.TRANSPARENT);
         pieChart.setCenterText("январь");
         pieChart.setCenterTextSize(20);
         pieChart.getDescription().setEnabled(false);
-
-        //Legend l = pieChart.getLegend();
 
 
         Legend l = pieChart.getLegend();
@@ -130,17 +159,8 @@ public class MainActivity extends AppCompatActivity {
 
         adapterRvLegends = new AdapterRvLegends(entries, this);
 
-        ArrayList<Integer> colors = new ArrayList<>();
-        for (int color: ColorTemplate.MATERIAL_COLORS) {
-            colors.add(color);
-        }
-
-        for (int color: ColorTemplate.VORDIPLOM_COLORS) {
-            colors.add(color);
-        }
-
         PieDataSet dataSet = new PieDataSet(entries, "");
-        dataSet.setColors(colors);
+        dataSet.setColors(new int[] { R.color.purple_500, R.color.yellow, R.color.red, R.color.purple_200, R.color.purple_700, R.color.blue, R.color.black }, getApplicationContext());
         dataSet.setSliceSpace(3);
         dataSet.setValueTextSize(0f);
 
@@ -156,15 +176,5 @@ public class MainActivity extends AppCompatActivity {
 
         pieChart.animateY(1400, Easing.EaseInOutQuad);
     }
-
-    /*private void getData() {
-        barArrayList = new ArrayList();
-        barArrayList.add(new BarEntry(2f, 10));
-        barArrayList.add(new BarEntry(3f, 20));
-        barArrayList.add(new BarEntry(4f, 30));
-        barArrayList.add(new BarEntry(5f, 40));
-        barArrayList.add(new BarEntry(6f, 50));
-        barArrayList.add(new BarEntry(7f, 60));
-    }*/
 
 }
