@@ -1,11 +1,5 @@
 package com_budget.budget.budget_java.personalbudget;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,37 +7,45 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomSheetDialogLogOutFragment.ItemClickListener{
+    //array for drawables(images) of tabs
     private int[] tabIcons = {
             R.drawable.goes_down_img,
             R.drawable.goes_up_img
     };
-
-    //btn addition
-    //ImageView going to profile btn
+    //btn log out
+    private ExtendedFloatingActionButton signOutBtn;
+    //btn go to addition activity
+    private FloatingActionButton addBtn;
     //btn go to bar chart (for annual period)
-    private ImageView profileBtn, addBtn, graphCartBtn;
+    private ImageView graphCartBtn;
     //TabLayout implementing
     private TabLayout tabsExpensesAndIncomes;
     //RecyclerView implementing
-    private RecyclerView rvLegend;
-    //ArrayList for items legends in recyclerView
+    private RecyclerView rvLegend, rvMonths;
+    //ArrayList for items months in recyclerView
+    ArrayList<ItemMonth> arrayMonth;
+    //Adapter for Months RecyclerView
+    private AdapterMonths adapterMonths;
     //Adapter for Legend RecyclerView
     private AdapterRvLegends adapterRvLegends;
     //Pie chart View
@@ -55,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         init();
 
         setupTabIcons();
@@ -64,19 +64,22 @@ public class MainActivity extends AppCompatActivity {
 
         setupPieChart();
         loadPieChartData();
-        buildRecyclerVIew();
+        buildRecyclerViewLegend();
 
         rvLegend.setAdapter(adapterRvLegends);
+
+        buildRecyclerViewMonth();
+        setDataMonths();
 
         View.OnClickListener BTNsClicks = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (view.getId()){
+                switch (view.getId()) {
+                    case R.id.signOutBtn:
+                        showBottomSheet(view);
+                        break;
                     case R.id.addBtn:
                         startActivity(new Intent(getApplicationContext(), AdditionActivity.class));
-                        break;
-                    case R.id.profileBtn:
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         break;
                     case R.id.graphCartImgBtn:
                         startActivity(new Intent(getApplicationContext(), BarChartActivity.class));
@@ -85,26 +88,49 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         addBtn.setOnClickListener(BTNsClicks);
+        signOutBtn.setOnClickListener(BTNsClicks);
         graphCartBtn.setOnClickListener(BTNsClicks);
-        profileBtn.setOnClickListener(BTNsClicks);
 
     }
 
-    private void init(){
-        profileBtn = findViewById(R.id.profileBtn);
+    private void init() {
         addBtn = findViewById(R.id.addBtn);
+        signOutBtn = findViewById(R.id.signOutBtn);
         graphCartBtn = findViewById(R.id.graphCartImgBtn);
 
         tabsExpensesAndIncomes = findViewById(R.id.tabsExpensesAndIncomes);
 
         pieChart = findViewById(R.id.chart1);
         rvLegend = findViewById(R.id.rvLegend);
+        rvMonths = findViewById(R.id.rvMonths);
     }
 
-    private void buildRecyclerVIew(){
+    private void buildRecyclerViewLegend() {
         rvLegend.setHasFixedSize(true);
         rvLegend.setLayoutManager(new LinearLayoutManager(this));
+    }
 
+    private void buildRecyclerViewMonth() {
+        rvMonths.setHasFixedSize(true);
+        rvMonths.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+    }
+
+    private void setDataMonths(){
+        arrayMonth = new ArrayList<>();
+        arrayMonth.add(new ItemMonth("January"));
+        arrayMonth.add(new ItemMonth("February"));
+        arrayMonth.add(new ItemMonth("March"));
+        arrayMonth.add(new ItemMonth("April"));
+        arrayMonth.add(new ItemMonth("May"));
+        arrayMonth.add(new ItemMonth("June"));
+        arrayMonth.add(new ItemMonth("July"));
+        arrayMonth.add(new ItemMonth("August"));
+        arrayMonth.add(new ItemMonth("September"));
+        arrayMonth.add(new ItemMonth("October"));
+        arrayMonth.add(new ItemMonth("November"));
+        arrayMonth.add(new ItemMonth("December"));
+        adapterMonths = new AdapterMonths(arrayMonth, getApplicationContext());
+        rvMonths.setAdapter(adapterMonths);
     }
 
     private void setupTabIcons() {
@@ -121,15 +147,13 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setDrawRoundedSlices(true);
         pieChart.setDrawHoleEnabled(true);
         pieChart.setEntryLabelColor(Color.TRANSPARENT);
-        pieChart.setCenterText("январь");
+        pieChart.setCenterText("January");
         pieChart.setCenterTextSize(20);
         pieChart.getDescription().setEnabled(false);
-
 
         Legend l = pieChart.getLegend();
 
         l.setTextColor(Color.BLACK);
-
 
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
@@ -145,8 +169,6 @@ public class MainActivity extends AppCompatActivity {
         l.setDrawInside(false);
         l.setEnabled(true);
 
-
-
     }
 
     private void loadPieChartData() {
@@ -160,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         adapterRvLegends = new AdapterRvLegends(entries, this);
 
         PieDataSet dataSet = new PieDataSet(entries, "");
-        dataSet.setColors(new int[] { R.color.purple_500, R.color.yellow, R.color.red, R.color.purple_200, R.color.purple_700, R.color.blue, R.color.black }, getApplicationContext());
+        dataSet.setColors(new int[]{R.color.purple_500, R.color.yellow, R.color.red, R.color.purple_200, R.color.purple_700, R.color.blue, R.color.black}, getApplicationContext());
         dataSet.setSliceSpace(3);
         dataSet.setValueTextSize(0f);
 
@@ -177,4 +199,15 @@ public class MainActivity extends AppCompatActivity {
         pieChart.animateY(1400, Easing.EaseInOutQuad);
     }
 
+    public void showBottomSheet(View view) {
+        BottomSheetDialogLogOutFragment addPhotoBottomDialogFragment =
+                BottomSheetDialogLogOutFragment.newInstance();
+        addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
+                BottomSheetDialogLogOutFragment.TAG);
+    }
+
+    @Override
+    public void onItemClick(String item) {
+        startActivity(new Intent(getApplicationContext(), SuggestionWithLoginSysActivity.class));
+    }
 }

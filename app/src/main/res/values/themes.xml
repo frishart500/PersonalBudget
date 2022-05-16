@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.PersonalBudget" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -14,6 +17,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ActionItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+    </style>
 
     <style name="BaseAppTheme" parent="android:Theme.Material">
         <!-- enable window content transitions -->

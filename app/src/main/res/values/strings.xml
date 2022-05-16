@@ -1,5 +1,46 @@
 <resources>
     <string name="app_name">PersonalBudget</string>
+    <!--Additional activity-->
+    <string name="addition_text">Addition</string>
+    <string name="add_sum_text">Add the sum</string>
+    <string name="entering_num_text">Enter num</string>
+    <string name="income_text">Income</string>
+    <string name="expense_text">Expense</string>
+    <string name="add_category_text">Add the category of expense</string>
+    <string name="entering_category_text">Enter category</string>
+    <string name="upload_btn_text">Upload</string>
+    <string name="cancel_btn_text">Cancel</string>
+    <!--Forgot password activity-->
+    <string name="forgot_hint">Enter your email below to restore \nyour password.</string>
+    <string name="done_btn">Done</string>
+    <!--Sign up activity-->
+    <string name="sign_up_hint">Sign up below to create \nsecure account.</string>
+    <string name="name_hint">Name</string>
+    <string name="register_text">Register</string>
+    <!--Mutual-->
+    <string name="log_out_text">Log out</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_up_text">Sign up</string>
+    <string name="facebook_text">facebook</string>
+    <string name="google_text">google</string>
+    <string name="twitter_text">twitter</string>
+    <!--SuggestLoginOrSignUp Activity-->
+    <string name="login_hint">Log in below to enter \nyour account.</string>
+    <string name="login_text">Log in</string>
+    <string name="or_text">or</string>
+    <string name="forgot_password_text">Forgot password?</string>
+    <!--Bottom sheet dialog-->
+    <string name="logout_hint">Are you really want to Log out?</string>
+    <!--Legend-->
+    <string name="excess_text">excess</string>
+    <!--MainActivity-->
+    <string name="category_text">Categories</string>
+    <string name="welcome_text">welcome to Personal Budget Analytics</string>
+    <string name="header_text">Finance Analytics</string>
+    <string name="tab_expenses_text">Expenses</string>
+    <string name="tab_incomes_text">Incomes</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -5,13 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
 import java.util.ArrayList;
 
 public class AdapterRvLegends extends RecyclerView.Adapter<AdapterRvLegends.ViewHolderLegend> {
@@ -35,7 +31,6 @@ public class AdapterRvLegends extends RecyclerView.Adapter<AdapterRvLegends.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolderLegend holder, int position) {
         holder.namingLegend.setText(arrayLegends.get(position).getLabel());
-        //holder.namingLegend.setTextColor(context.getResources().getColor());
         holder.moneyLegend.setText(arrayLegends.get(position).getValue() + "$");
     }
 

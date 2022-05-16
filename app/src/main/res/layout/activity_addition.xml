@@ -10,11 +10,11 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main.toolbar"
         android:layout_width="match_parent"
-        app:contentInsetStart="0dp"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="top"
-        app:layout_collapseMode="pin"
-        android:background="@color/purple_500">
+        android:background="@color/purple_500"
+        app:contentInsetStart="0dp"
+        app:layout_collapseMode="pin">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Addition"
+                android:text="@string/addition_text"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
@@ -46,100 +46,75 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add the sum"
+        android:layout_margin="20dp"
+        android:text="@string/add_sum_text"
         android:textColor="@color/black"
         android:textSize="24dp"
-        android:textStyle="bold"
-        android:layout_margin="20dp"/>
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/numTextInput"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter num"
-        app:startIconDrawable="@drawable/num_img"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:hint="@string/entering_num_text"
+        app:startIconDrawable="@drawable/num_img">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            />
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <CheckBox
+        android:layout_marginTop="20dp"
+        android:id="@+id/checkBoxIncome"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginLeft="20dp"
+        android:buttonTint="@color/purple_500"
+        android:text="@string/income_text"
+        android:textColor="@color/purple_500" />
 
-        <CheckBox
-            android:layout_marginLeft="20dp"
-            android:id="@+id/checkBoxIncome"
-            android:buttonTint="@color/purple_500"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Income"
-            android:textColor="@color/purple_500"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/checkBoxExpense"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:layout_marginLeft="20dp"
-            android:id="@+id/checkBoxExpense"
-            android:buttonTint="@color/red"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Expense"
-            android:textColor="@color/red"/>
-
-    </LinearLayout>
-
-
+        android:layout_marginLeft="20dp"
+        android:buttonTint="@color/red"
+        android:text="@string/expense_text"
+        android:textColor="@color/red" />
 
 
     <TextView
         android:id="@+id/description_for_expense_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add the category of expense"
-        android:textColor="@color/black"
-        android:textSize="20dp"
+        android:layout_margin="20dp"
         android:letterSpacing=".1"
-        android:layout_margin="20dp"/>
+        android:text="@string/add_category_text"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/categoryTextInput"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter category"
-        app:startIconDrawable="@drawable/num_img"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:hint="@string/entering_category_text"
+        app:startIconDrawable="@drawable/num_img">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            />
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -148,26 +123,26 @@
         android:id="@+id/btn_upload"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         android:elevation="4dp"
-        app:cornerRadius="8dp"
+        android:text="@string/upload_btn_text"
         android:transitionName="text_sign_up"
         app:backgroundTint="@color/purple_500"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Upload"/>
+        app:cornerRadius="8dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:elevation="4dp"
-        app:cornerRadius="8dp"
-        android:transitionName="text_sign_up"
-        app:backgroundTint="@color/red"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="Cancel"/>
+        android:elevation="4dp"
+        android:text="@string/cancel_btn_text"
+        android:transitionName="text_sign_up"
+        app:backgroundTint="@color/red"
+        app:cornerRadius="8dp" />
 
 
 </LinearLayout>

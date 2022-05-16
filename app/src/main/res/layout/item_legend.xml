@@ -28,8 +28,7 @@
                 android:id="@+id/howMuchOperations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="excess"
-                android:textColor="@color/red"
+                android:text="@string/excess_text"
                 android:textSize="16dp" />
         </LinearLayout>
 
