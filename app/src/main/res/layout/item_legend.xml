@@ -13,15 +13,31 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                app:tint="@color/red"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/delete_img_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/delete_img" />
+
+        <LinearLayout
+            android:layout_alignLeft="@+id/delete_img_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/namingLegend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:letterSpacing=".1"
                 android:text="Sport Facilities"
                 android:textColor="@color/black"
-                android:letterSpacing=".1"
                 android:textSize="18dp" />
 
             <TextView
@@ -31,7 +47,7 @@
                 android:text="@string/excess_text"
                 android:textSize="16dp" />
         </LinearLayout>
-
+        </LinearLayout>
         <TextView
             android:id="@+id/moneyLegend"
             android:layout_width="wrap_content"

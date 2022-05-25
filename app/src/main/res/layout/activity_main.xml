@@ -17,7 +17,7 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/main.collapsing"
+            android:id="@+id/collapsing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -71,6 +71,8 @@
                         android:text="@string/welcome_text"
                         android:textColor="@color/white"
                         android:textSize="14dp" />
+
+
 
                 </LinearLayout>
 
@@ -132,219 +134,110 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+
+
+    <androidx.viewpager.widget.ViewPager
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:id="@+id/viewpagerMonthExpense"
+        />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="bottom|right">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/linLogOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/action"
+            android:layout_alignRight="@+id/action"
+            android:gravity="right"
+            android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/white"
-                android:elevation="4dp"
-                app:cardCornerRadius="8dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/img_user"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/account_circle_img"
-                        app:civ_border_color="@color/red"
-                        app:civ_border_width="2dp" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/email_profile_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/name_text"
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:letterSpacing=".1"
-                            android:text="freshart666@gmail.com"
-                            android:textColor="@color/black"
-                            android:textSize="16dp" />
-
-                        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                            android:id="@+id/signOutBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/email_profile_text"
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:backgroundTint="@color/red"
-                            android:text="@string/log_out_text"
-                            android:textColor="@color/white"
-                            app:icon="@drawable/sign_out_img"
-                            app:iconTint="@color/white"
-                            app:strokeWidth="0dp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textAnalitics"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/moneySumText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@+id/chart1"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="13 0000$"
-                            android:textAllCaps="false"
-                            android:textColor="@color/black"
-                            android:textSize="24dp" />
-
-                        <TextView
-                            android:id="@+id/periodOfTimeText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@+id/chart1"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:alpha="0.7"
-                            android:text="January Expenses"
-                            android:textAllCaps="false"
-                            android:textSize="16dp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/graphCartImgBtn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/bar_chart_img"
-                        app:tint="@color/black" />
-
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
-
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cardView1"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/chart1"
-                        android:layout_width="match_parent"
-                        android:layout_height="350dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp" />
-
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/rvMonths"/>
-
-            <TextView
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/logoutBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                android:text="@string/category_text"
-                android:textColor="@color/black"
-                android:textSize="34dp" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/cardView2"
                 android:layout_margin="10dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
+                android:backgroundTint="@color/red"
+                android:src="@drawable/sign_out_img"
+                app:borderWidth="0dp"
+                app:fabSize="normal"
+                app:tint="@color/white" />
+        </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvLegend"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+        <LinearLayout
+            android:id="@+id/linGraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linLogOut"
+            android:layout_alignLeft="@+id/action"
+            android:layout_alignRight="@+id/action"
+            android:gravity="right"
+            android:orientation="horizontal">
 
-            </androidx.cardview.widget.CardView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/graphBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/purple_500"
+                android:src="@drawable/bar_chart_img"
+                app:borderWidth="0dp"
+                app:fabSize="normal"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linGraph"
+            android:layout_alignLeft="@+id/action"
+            android:layout_alignRight="@+id/action"
+            android:gravity="right"
+            android:orientation="horizontal">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/addBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:backgroundTint="@color/purple_500"
                 android:src="@drawable/ic_baseline_add"
                 app:borderWidth="0dp"
                 app:fabSize="normal"
                 app:tint="@color/white" />
-
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linAdd"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/purple_500"
+            android:gravity="center"
+            app:icon="@drawable/edit_img"
+            app:iconTint="@color/white"
+            android:text="Action"
+            android:textColor="@color/white"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
+
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
